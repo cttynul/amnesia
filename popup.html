@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Amnesia</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+      align-items: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      animation: bounce 2s infinite;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Amnesia</h2>
+  <img src="./icons/icon-128.png" alt="Logo di Amnesia">
+  <p>L'estensione elimina la cronologia di navigazione ogni volta che apri il browser, mantenendo i cookie.</p>
+  <!--<p>Cancella cronologia ad ogni apertura scheda:
+  <input type="checkbox" id="alwaysDelete"></p>
+  <button id="save">Salva</button>
+  <script>
+    // Carica il valore dalla storage di Chrome
+    /*window.onload = () => {
+      chrome.storage.sync.get(['alwaysDelete'], (result) => {
+        const alwaysDelete = result.alwaysDelete ?? false;
+        document.getElementById('alwaysDelete').checked = alwaysDelete;
+      });
+    };
+      
+    document.getElementById('save').addEventListener('click', () => {
+      const alwaysDelete = document.getElementById('alwaysDelete').checked;
+      chrome.storage.sync.set({ alwaysDelete }, () => {
+        console.log('Impostazioni salvate');
+      });
+    });
+    */
+  </script>
+  -->
+  <p>Estensione piu' sicura e open source DELLO SPAZIO visto che me la sono sviluppato da solo :)</p>
+  <p>-adc</p>
+</body>
+</html>
