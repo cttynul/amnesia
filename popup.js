@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
   const historyCheckbox = document.getElementById('alwaysDeleteHistory');
   const downloadsCheckbox = document.getElementById('alwaysDeleteDownloads');
-  const onNewTabCheckbox = document.getElementById('alwaysDeleteOnNewTab');
+  //const onNewTabCheckbox = document.getElementById('alwaysDeleteOnNewTab');
   const languageSelector = document.getElementById('language-select');
   const saveButton = document.getElementById('save-button');
   const manualDeleteButton = document.getElementById('manual-delete-button');
 
   // Recupera i valori salvati e imposta lo stato iniziale
-  chrome.storage.sync.get(['alwaysDeleteHistory', 'alwaysDeleteDownloads', 'alwaysDeleteOnNewTab', 'language'], (data) => {
+  chrome.storage.sync.get(['alwaysDeleteHistory', 'alwaysDeleteDownloads', 'language'], (data) => {
     const alwaysDeleteHistory = data.alwaysDeleteHistory ?? true;
     const alwaysDeleteDownloads = data.alwaysDeleteDownloads ?? true;
-    const alwaysDeleteOnNewTab = data.alwaysDeleteOnNewTab ?? false;
+    //const alwaysDeleteOnNewTab = data.alwaysDeleteOnNewTab ?? false;
     
     historyCheckbox.checked = alwaysDeleteHistory;
     downloadsCheckbox.checked = alwaysDeleteDownloads;
-    onNewTabCheckbox.checked = alwaysDeleteOnNewTab;
+    //onNewTabCheckbox.checked = alwaysDeleteOnNewTab;
     
     const language = data.language || 'en';
     languageSelector.value = language;
@@ -25,13 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
   saveButton.addEventListener('click', () => {
     const alwaysDeleteHistory = historyCheckbox.checked;
     const alwaysDeleteDownloads = downloadsCheckbox.checked;
-    const alwaysDeleteOnNewTab = onNewTabCheckbox.checked;
+    //const alwaysDeleteOnNewTab = onNewTabCheckbox.checked;
     const selectedLanguage = languageSelector.value;
 
     chrome.storage.sync.set({
       alwaysDeleteHistory: alwaysDeleteHistory,
       alwaysDeleteDownloads: alwaysDeleteDownloads,
-      alwaysDeleteOnNewTab: alwaysDeleteOnNewTab,
+      //alwaysDeleteOnNewTab: alwaysDeleteOnNewTab,
       language: selectedLanguage
     }, () => {
       console.log('Impostazioni salvate con successo!');
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadsLabel: "Cancella cronologia dei download",
         onNewTabLabel: "Cancella ad ogni nuova scheda",
         saveButtonText: "Salva Impostazioni",
-        info1: "L'estensione più sicura dello spazio visto che me la sono sviluppata da solo!",
+        info1: "L'estensione piu sicura dello spazio visto che me la sono sviluppata da solo!",
         info2: "Per te da cttynul",
         githubLink: "Vedi su GitHub"
       }
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.settings-section h4').textContent = translations[lang].settingsTitle;
     document.querySelector('label[for="alwaysDeleteHistory"]').textContent = translations[lang].historyLabel;
     document.querySelector('label[for="alwaysDeleteDownloads"]').textContent = translations[lang].downloadsLabel;
-    document.querySelector('label[for="alwaysDeleteOnNewTab"]').textContent = translations[lang].onNewTabLabel;
+    //document.querySelector('label[for="alwaysDeleteOnNewTab"]').textContent = translations[lang].onNewTabLabel;
     document.getElementById('save-button').textContent = translations[lang].saveButtonText;
     document.querySelector('.developer-info p:first-of-type').textContent = translations[lang].info1;
     document.querySelector('.developer-info p:nth-of-type(2)').textContent = translations[lang].info2;
