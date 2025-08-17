@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Amnesia",
   "version": "3.0",
-  "description": "Elimina automaticamente la cronologia di navigazione all'apertura del browser, ma mantiene i cookie. By adc :)",
+  "description": "Delete all browsing and downloading history but keeping cookies and cache, why this? Cause I needed it :)",
   "permissions": [
     "history",
     "storage",
