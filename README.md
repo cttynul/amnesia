@@ -14,6 +14,8 @@ Are you tired of Google (and every other browser vendor) holding onto your Brows
 
 Because we're fixing something Google apparently doesn't want to fix! While incognito mode is a thing, it's a temporary solution. I believe you should have persistent control over your Browse history without jumping through hoops.
 
+Icon is from Microsoft FluentUI Pack.
+
 ---
 
 ## Features

@@ -4,32 +4,121 @@
   <title>Amnesia</title>
   <style>
     body {
+      width: 300px;
       font-family: 'Roboto', sans-serif;
       text-align: center;
-      background-color: #f5f5f5;
-      align-items: center;
+      background-color: #f0f4f8;
+      color: #334e68;
+      padding: 20px;
+      margin: 0;
+      border-radius: 10px;
     }
 
     h2 {
-      color: #333;
-      margin-bottom: 20px;
+      color: #102a43;
+      margin-bottom: 5px;
       font-size: 24px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+    }
+
+    #tagline {
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #627d98;
+    }
+
+    #dynamic-text {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #627d98;
+      font-style: italic;
+    }
+
+    #language-selector {
+      margin-bottom: 20px;
+    }
+
+    #language-selector select {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid #cdd5dc;
+    }
+
+    .icon-container {
+      margin-bottom: 20px;
     }
 
     img {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       animation: bounce 2s infinite;
     }
 
-    p {
+    .settings-section {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .setting-item:last-child {
+      border-bottom: none;
+    }
+
+    .setting-item label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #334e68;
+    }
+
+    .developer-info {
       font-size: 12px;
-      line-height: 1.6;
-      color: #666;
+      color: #829ab1;
+      margin-top: 20px;
+    }
+    
+    .developer-info a {
+        color: #0b69ff;
+        text-decoration: none;
+    }
+    
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    #save-button,
+    #manual-delete-button {
+      background-color: #0b69ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    #manual-delete-button {
+      background-color: #dc3545;
+    }
+
+    #save-button:hover {
+      background-color: #0052cc;
+    }
+    
+    #manual-delete-button:hover {
+      background-color: #c82333;
     }
 
     @keyframes bounce {
@@ -37,7 +126,7 @@
         transform: translateY(0);
       }
       50% {
-        transform: translateY(-10px);
+        transform: translateY(-5px);
       }
       100% {
         transform: translateY(0);
@@ -47,30 +136,50 @@
 </head>
 <body>
   <h2>Amnesia</h2>
-  <img src="./icons/icon-128.png" alt="Logo di Amnesia">
-  <p>L'estensione elimina la cronologia di navigazione ogni volta che apri il browser, mantenendo i cookie.</p>
-  <!--<p>Cancella cronologia ad ogni apertura scheda:
-  <input type="checkbox" id="alwaysDelete"></p>
-  <button id="save">Salva</button>
-  <script>
-    // Carica il valore dalla storage di Chrome
-    /*window.onload = () => {
-      chrome.storage.sync.get(['alwaysDelete'], (result) => {
-        const alwaysDelete = result.alwaysDelete ?? false;
-        document.getElementById('alwaysDelete').checked = alwaysDelete;
-      });
-    };
-      
-    document.getElementById('save').addEventListener('click', () => {
-      const alwaysDelete = document.getElementById('alwaysDelete').checked;
-      chrome.storage.sync.set({ alwaysDelete }, () => {
-        console.log('Impostazioni salvate');
-      });
-    });
-    */
-  </script>
-  -->
-  <p>Estensione piu' sicura e open source DELLO SPAZIO visto che me la sono sviluppato da solo :)</p>
-  <p>-adc</p>
+  <div id="tagline">An extension that protects your privacy.</div>
+  <div id="dynamic-text">deleting your browser history</div>
+
+  <div id="language-selector">
+    <label for="language-select">Language:</label>
+    <select id="language-select">
+      <option value="en">English</option>
+      <option value="it">Italiano</option>
+    </select>
+  </div>
+  
+  <div class="icon-container">
+    <img src="./icons/icon-128.png" alt="Amnesia Logo">
+  </div>
+  
+  <div class="button-group">
+    <button id="manual-delete-button">Delete All History Now</button>
+  </div>
+  
+  <div class="settings-section">
+    <h4>Settings:</h4>
+    <div class="setting-item">
+      <label for="alwaysDeleteHistory">Delete browsing history</label>
+      <input type="checkbox" id="alwaysDeleteHistory">
+    </div>
+    <div class="setting-item">
+      <label for="alwaysDeleteDownloads">Delete downloads history</label>
+      <input type="checkbox" id="alwaysDeleteDownloads">
+    </div>
+    <!--<div class="setting-item">
+      <label for="alwaysDeleteOnNewTab">Delete on new tab</label>
+      <input type="checkbox" id="alwaysDeleteOnNewTab">
+    </div>
+    -->
+  </div>
+
+  <button id="save-button">Save Settings</button>
+  
+  <div class="developer-info">
+    <p>The most secure and open-source extension in the world!</p>
+    <p>Developed by -adc</p>
+    <a href="https://github.com/cttynul/amnesia" target="_blank">View on GitHub</a>
+  </div>
+  
+  <script src="popup.js"></script>
 </body>
 </html>

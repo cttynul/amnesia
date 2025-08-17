@@ -1,37 +1,61 @@
+// Listener per l'installazione dell'estensione.
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("Estensione installata");
-  // Aspetta qualche secondo prima di eliminare la cronologia
-  setTimeout(() => {
-    chrome.history.deleteAll(() => {
-      console.log("Cronologia di navigazione eliminata al momento dell'installazione.");
-    });
-  }, 2000); // 2000 millisecondi = 2 secondi
+  console.log("Estensione 'Amnesia' installata.");
+  
+  // Imposto le opzioni di default.
+  // 'alwaysDeleteHistory' è attiva.
+  // 'alwaysDeleteOnNewTab' è disattivata.
+  // 'alwaysDeleteDownloads' è attiva.
+  chrome.storage.sync.set({
+    alwaysDeleteHistory: true,
+    alwaysDeleteOnNewTab: false,
+    alwaysDeleteDownloads: true
+  });
+  
+  // Apro il popup dopo l'installazione.
+  chrome.windows.create({
+    url: "popup.html",
+    type: "popup",
+    width: 350,
+    height: 700
+  });
 });
 
-chrome.runtime.onStartup.addListener(() => {   
-  setTimeout(() => {
-    chrome.history.deleteAll(() => {
-      console.log("Cronologia di navigazione eliminata al boot.");
-    });
-  }, 2000); // 2000 millisecondi = 2 secondi
+// Listener per l'avvio del browser.
+chrome.runtime.onStartup.addListener(() => {
+  console.log("Il browser è stato avviato.");
+  
+  chrome.storage.sync.get(['alwaysDeleteHistory', 'alwaysDeleteDownloads'], (result) => {
+    // Cancella la cronologia di navigazione all'avvio solo se l'opzione è attiva.
+    const alwaysDeleteHistory = result.alwaysDeleteHistory ?? true;
+    if (alwaysDeleteHistory) {
+      chrome.history.deleteAll(() => {
+        console.log("Cronologia di navigazione eliminata all'avvio del browser.");
+      });
+    }
+    
+    // Cancella la cronologia dei download all'avvio solo se l'opzione è attiva.
+    const alwaysDeleteDownloads = result.alwaysDeleteDownloads ?? true; 
+    if (alwaysDeleteDownloads) {
+      chrome.downloads.deleteAll(() => {
+        console.log("Cronologia dei download eliminata all'avvio del browser.");
+      });
+    }
+  });
 });
 
-/*
-chrome.storage.sync.get(['alwaysDelete'], (result) => {
-  const alwaysDelete = result.alwaysDelete ?? false; // Valore di default: false
+// Aggiunge un "listener" per quando una nuova scheda è stata caricata completamente.
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status === 'complete') {
+    chrome.storage.sync.get(['alwaysDeleteOnNewTab'], (result) => {
+      // Imposto il valore a 'false' se non è stato ancora salvato.
+      const alwaysDeleteOnNewTab = result.alwaysDeleteOnNewTab ?? false; 
 
-  if (alwaysDelete) {
-    // Cancella sempre la cronologia
-    chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-      if (changeInfo.status === 'complete') {
-        chrome.history.deleteAll();
+      if (alwaysDeleteOnNewTab) {
+        chrome.history.deleteAll(() => {
+          console.log("Cronologia di navigazione eliminata dopo il caricamento di una nuova scheda.");
+        });
       }
-    });
-  } else {
-    // Cancella solo all'avvio
-    chrome.runtime.onStartup.addListener(() => {
-      chrome.history.deleteAll();
     });
   }
 });
-*/
