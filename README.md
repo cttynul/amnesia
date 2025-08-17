@@ -2,7 +2,7 @@
   <img src="https://github.com/cttynul/amnesia/blob/master/icons/icon-128.png?raw=true" alt="Amnesia Icon">
 </p>
 
-# Amnesia 👁️ 
+# Amnesia
 
 ---
 
